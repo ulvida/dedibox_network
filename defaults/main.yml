@@ -1,0 +1,23 @@
+---
+# defaults file for online.net_network
+# parameters for a proxmox node network configuration
+
+dedibox_use_systemd: true
+
+# net_interfaces:
+# - id: net0
+#   name: vmbr0
+#   # Do define at least the IPv4!
+#   ip4: 192.168.33.10
+#   netmask4: 255.255.255.0
+#   gw4: 192.168.33.1
+#   # ip6: 2001:db8::10
+#   # gw6: 2001:db8:6a::1
+#   # netmask6: 64
+#   # If we define a netif_bridge_port, the interface is defined as a bridge
+#   # bridge_port: eth0
+#   # This is the DUID parameter given in online.net web console
+#   DHCPv6_DUID: 00:03:00:01:59:be:f6:5c:17:62
+# - id: net1 
+#   dhcp: yes  # interface with DCHP, previous parameters aren't take into account
+#   mtu: 9000  # sets the MTU of the interface, for DHCP or static

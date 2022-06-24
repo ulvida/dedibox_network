@@ -1,0 +1,12 @@
+---
+# handlers file for online.net_network
+
+- name: restart networking
+  service:
+    name: networking
+    state: restarted
+
+- name: restart dhclient6
+  service:
+    name: dhclient
+    state: restarted

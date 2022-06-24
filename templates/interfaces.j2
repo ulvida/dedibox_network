@@ -1,0 +1,45 @@
+## File generteted by ansible
+
+# the PVE managed interfaces into external files!
+
+auto lo
+iface lo inet loopback
+
+{% for interface in net_interfaces %}
+{%   if interface.bridge_port is defined %}
+iface {{ interface.bridge_port }} inet manual
+{%   endif %}
+
+auto {{ interface.name }}
+{%   if interface.dhcp is defined and interface.dhcp %}
+iface {{ interface.name }} inet dhcp
+{%   else %}
+iface {{ interface.name }} inet static
+        address  {{ interface.ip4 }}
+        netmask  {{ interface.netmask4 }}
+        {% if interface.gw4 is defined %}gateway  {{ interface.gw4 }}
+        {% endif %}
+{%   endif %}
+
+        {% if interface.bridge_port is defined %}bridge-ports {{ interface.bridge_port }}
+        bridge-stp off
+        bridge-fd 0
+        {% endif %}
+
+        {% if interface.mtu is defined %}mtu {{ interface.mtu }}
+        {% endif %}
+
+{%   if interface.ip6 is defined and not (interface.dhcp is defined and interface.dhcp) %}
+{# auto {{ interface.name }} #}
+iface {{ interface.name }} inet6 static
+{%     if dedibox_use_systemd %}
+        pre-up modprobe ipv6
+        pre-up dhclient -cf /etc/dhcp/dhclient6.conf -6 -P -d -v $IFACE
+{%     endif %}
+        address  {{ interface.ip6 }}
+        netmask  {{ interface.netmask6 }}
+        {% if interface.gw6 is defined %}gateway {{ interface.gw6 }}
+        {% endif %}
+{%   endif %}
+
+{% endfor %}

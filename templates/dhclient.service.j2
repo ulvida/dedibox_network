@@ -1,0 +1,19 @@
+[Unit]
+Description=dhclient for sending DUID IPv6
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Restart=always
+RestartSec=10
+Type=forking
+{% for interface in net_interfaces %}
+{%   if interface.DHCPv6_DUID is defined %}
+ExecStart=/usr/sbin/dhclient -cf /etc/dhcp/dhclient6.conf -6 -P -v {{ interface.name }}
+ExecStop=/usr/sbin/dhclient -x -pf /var/run/dhclient6.pid
+
+{%   endif %}
+{% endfor %}
+
+[Install]
+WantedBy=network.target

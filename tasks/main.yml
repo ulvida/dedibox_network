@@ -1,0 +1,59 @@
+---
+# tasks file for online.net_network
+
+- name: set host network interfaces
+  template: 
+    dest: /etc/network/interfaces
+    src: interfaces.j2
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+  - restart networking
+
+- name: Check if /etc/dhcp directory exists
+  file: 
+    path: /etc/dhcp
+    state: directory
+    owner: root
+    group: root
+    mode: "0775"
+
+- name: configure dhclient6.conf for online.net
+  template:   
+    dest: /etc/dhcp/dhclient6.conf
+    src: dhclient6.conf.j2
+
+- name: Configure dhclient service
+  block: 
+
+  - name: Check if /etc/systemd/system directory exists
+    file: 
+      path: /etc/systemd/system
+      state: directory
+      owner: root
+      group: root
+      mode: "0775"
+
+  - name: copy dhclient service systemd file
+    template: 
+      src: dhclient.service.j2
+      dest: /etc/systemd/system/dhclient.service
+    notify:
+    - restart dhclient6
+
+  - name: Enable service dhclient.service
+    ansible.builtin.service:
+      name: dhclient
+      enabled: yes
+
+  when: dedibox_use_systemd
+
+# - name: copy dhclient script file
+#   template: 
+#     src: dhclient.sh.j2
+#     dest: /usr/local/etc/dhclient.sh
+#     mode: "0775"
+#   notify:
+#   - restart dhclient6
+...
