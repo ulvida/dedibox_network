@@ -1,5 +1,5 @@
 #!/bin/bash
-{% for interface in net_interfaces if interface.DHCPv6_DUID is defined %}
+{% for interface in dedibox_net_interfaces if interface.DHCPv6_DUID is defined %}
 {% if loop.first %}
 /sbin/dhclient -cf /etc/dhcp/dhclient6.conf -6 -P -v {{ interface.name }}
 ip addr add dev {{ interface.name }} {{ interface.ip6 }}/{{ interface.netmask6 }}

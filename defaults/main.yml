@@ -4,7 +4,7 @@
 
 dedibox_use_systemd: true
 
-# net_interfaces:
+# dedibox_net_interfaces:
 # - id: net0
 #   name: vmbr0
 #   # Do define at least the IPv4!

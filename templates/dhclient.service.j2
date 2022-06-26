@@ -7,7 +7,7 @@ Wants=network-online.target
 Restart=always
 RestartSec=10
 Type=forking
-{% for interface in net_interfaces %}
+{% for interface in dedibox_net_interfaces %}
 {%   if interface.DHCPv6_DUID is defined %}
 ExecStart=/usr/sbin/dhclient -cf /etc/dhcp/dhclient6.conf -6 -P -v {{ interface.name }}
 ExecStop=/usr/sbin/dhclient -x -pf /var/run/dhclient6.pid

@@ -5,7 +5,7 @@
 auto lo
 iface lo inet loopback
 
-{% for interface in net_interfaces %}
+{% for interface in dedibox_net_interfaces %}
 {%   if interface.bridge_port is defined %}
 iface {{ interface.bridge_port }} inet manual
 {%   endif %}

@@ -1,7 +1,7 @@
 # As documented at: 
 # https://documentation.online.net/en/dedicated-server/network/ipv6/prefix
 
-{% for interface in net_interfaces %}
+{% for interface in dedibox_net_interfaces %}
 {%   if interface.DHCPv6_DUID is defined %}
 interface "{{ interface.name }}" {
    send dhcp6.client-id {{ interface.DHCPv6_DUID }};

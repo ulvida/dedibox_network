@@ -1,7 +1,7 @@
 galaxy_info:
-  author: your name
-  description: your description
-  company: your company (optional)
+  author: Daniel Viñar Ulriksen (@ulvida)
+  description: Libre pensador
+  company: Universidad de la República
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -14,9 +14,9 @@ galaxy_info:
   # - GPLv3
   # - Apache
   # - CC-BY
-  license: license (GPLv2, CC-BY, etc)
+  license: GPLv3
 
-  min_ansible_version: 2.4
+  min_ansible_version: 2.13
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
@@ -35,6 +35,15 @@ galaxy_info:
   # To view available platforms and versions (or releases), visit:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
+  platform:
+  - name: Debian
+    version:
+    - buster
+    - bulleye
+  - name: Proxmox
+    version:
+    - 6.4
+    - 7
   # platforms:
   # - name: Fedora
   #   versions:
@@ -47,7 +56,13 @@ galaxy_info:
   #   - 7
   #   - 99.99
 
-  galaxy_tags: []
+  galaxy_tags:
+  - dedibox
+  - online.net
+  - scaleway
+  - network
+  - IPv6
+  - bridge
     # List tags for your role here, one per line. A tag is a keyword that describes
     # and categorizes the role. Users find roles by searching for tags. Be sure to
     # remove the '[]' above, if you add tags to this list.
